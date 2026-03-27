@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAIBHAV | Vir Vaibhav Hub</title>
+    <style>
+        :root {
+            --bg: #fdfd96; 
+            --accent: #ff5c5c; 
+            --black: #000000;
+            --white: #ffffff;
+            --blue: #a2d2ff; 
+            --green: #b9ffb9; 
+            --border-size: 4px;
+        }
+
+        /* Base Reset */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial Black', sans-serif; }
+        body { background-color: var(--bg); padding: 10px 10px 120px 10px; color: var(--black); line-height: 1.2; overflow-x: hidden; }
+
+        /* Floating Contact Bar */
+        .contact-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            border: var(--border-size) solid var(--black);
+            padding: 12px 15px;
+            display: flex;
+            gap: 15px;
+            box-shadow: 6px 6px 0px var(--black);
+            z-index: 2001;
+            width: max-content;
+            max-width: 90%;
+            justify-content: center;
+        }
+
+        .contact-item {
+            color: var(--black);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s ease;
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* Navbar */
+        nav {
+            background: var(--white);
+            border: var(--border-size) solid var(--black);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 6px 6px 0px var(--black);
+            margin-bottom: 30px;
+            position: relative; 
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .logo-box {
+            width: 40px; height: 40px;
+            background: var(--black);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .nav-links { 
+            list-style: none; 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 5px; 
+            width: 100%;
+        }
+        
+        .nav-links li { 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            padding: 8px 12px; 
+            font-size: 0.7rem; 
+            border: 2px solid transparent;
+        }
+
+        #nav-indicator {
+            position: absolute;
+            background: var(--accent);
+            border: 2px solid var(--black);
+            z-index: -1;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        /* Content Container */
+        .content-container { max-width: 900px; margin: 0 auto; width: 100%; }
+
+        .page-section {
+            display: none;
+            background: var(--white);
+            border: var(--border-size) solid var(--black);
+            padding: 30px 20px;
+            box-shadow: 8px 8px 0px var(--black);
+        }
+
+        .active { display: block; }
+
+        h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 15px; word-wrap: break-word; }
+        
+        .badge {
+            background: var(--black); color: white;
+            padding: 6px 12px; font-size: 0.65rem;
+            border: 2px solid var(--black);
+            display: inline-block; margin: 3px;
+        }
+
+        .card {
+            border: var(--border-size) solid var(--black);
+            padding: 20px;
+            background: var(--white);
+            box-shadow: 6px 6px 0px var(--black);
+            margin-top: 15px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            background: var(--black);
+            color: var(--white);
+            padding: 15px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            box-shadow: 4px 4px 0px var(--accent);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Responsive adjustments for Desktop */
+        @media (min-width: 768px) {
+            body { padding: 20px 20px 120px 20px; }
+            nav { flex-direction: row; justify-content: space-between; padding: 10px 20px; min-height: 85px; }
+            .brand-container { margin-bottom: 0; }
+            .nav-links { width: auto; gap: 10px; }
+            .nav-links li { font-size: 0.8rem; padding: 12px 18px; }
+            h1 { font-size: 3.5rem; }
+            .page-section { padding: 50px 40px; box-shadow: 12px 12px 0px var(--black); }
+            .btn { display: inline-block; width: auto; }
+            .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .result-link { text-decoration: none; color: inherit; }
+    </style>
+</head>
+<body>
+
+    <div class="contact-bar">
+        <a href="https://wa.me/917721954115" class="contact-item" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
+        <a href="tel:+917721954115" class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </a>
+        <a href="mailto:vir.vaibhav007@gmail.com" class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+        <a href="https://www.instagram.com/its_ur_cookiee/" class="contact-item" target="_blank">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://github.com/vislabs-web" class="contact-item" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        </a>
+    </div>
+
+    <nav id="navbar">
+        <div class="brand-container" onclick="showPage('home', this)">
+            <div class="logo-box">V</div>
+            <div style="font-size: 1rem;">MY_PROTOFILO</div>
+        </div>
+        <div id="nav-indicator"></div>
+        <ul class="nav-links">
+            <li onclick="showPage('about', this)">About</li>
+            <li onclick="showPage('search', this)">Search</li>
+            <li onclick="showPage('products', this)">Shop</li>
+            <li onclick="showPage('soon', this)">Soon</li>
+        </ul>
+    </nav>
+
+    <div class="content-container">
+        <div id="home" class="page-section active">
+            <h1>WELCOME_TO THE_HUB</h1>
+            <p style="background: var(--blue); display: inline-block; padding: 5px 10px; border: 2px solid #000; margin-bottom: 15px; font-size: 0.8rem;">
+                VAIBHAV VISHWAKARMA // VIR VAIBHAV
+            </p>
+            <p>16-year-old creator specializing in <strong>Vibe Coding</strong> and Manga Artistry.</p>
+            <button class="btn" onclick="showPage('products', null)">Go to Shop →</button>
+        </div>
+
+        <div id="about" class="page-section">
+            <h1>THE_AUTHOR</h1>
+            <div>
+                <span class="badge">16 YRS OLD</span>
+                <span class="badge" style="background: var(--blue);">SCIENCE STUDENT</span>
+                <span class="badge" style="background: var(--green);">GRAD 2029</span>
+            </div>
+            <div class="about-grid">
+                <div class="card"><h3>STRENGTHS</h3><p>⚡ Vibe Coding<br>🗣️ Communication</p></div>
+                <div class="card" style="background: var(--accent); color: white;"><h3>INTERESTS</h3><p>Manga Artist<br>Technology</p></div>
+            </div>
+            <a href="resume.pdf" download class="btn" style="background: var(--blue); color: var(--black); margin-top: 20px;">DOWNLOAD_RESUME (.PDF)</a>
+        </div>
+
+        <div id="search" class="page-section">
+            <h1>SEARCH_DATABASE</h1>
+            <input type="text" id="db-search" style="width:100%; padding:15px; border:4px solid #000; margin-top:10px;" placeholder="SCANNING FOR..." onkeyup="filterSites()">
+            <div id="search-results" class="results-grid"></div>
+        </div>
+
+        <div id="products" class="page-section">
+            <h1>THE_SHOP</h1>
+            <div class="card">
+                <h2 style="font-size: 1.8rem;">'UNTITLED'</h2>
+                <p style="background: var(--green); display: inline-block; padding: 2px 8px; border: 2px solid #000; margin: 10px 0;">BY VIR VAIBHAV</p>
+                <a href="https://vislabs-web.github.io/book/" target="_blank" class="btn">ORDER NOW →</a>
+            </div>
+            <div class="card" style="background: #eee; border-style: dashed; opacity: 0.7;">
+                <h3>NEXT_RELEASE: NEW_MANGA</h3>
+                <p>Status: Storyboarding... Coming Soon!</p>
+            </div>
+        </div>
+
+        <div id="soon" class="page-section">
+            <h1>SOON_2026</h1>
+            <div class="card" style="background: var(--black); color: white; text-align: center; padding: 40px 10px;">
+                <h2>MANGA_PROJ</h2>
+                <p>A new visual experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sites = [
+            { name: "GITHUB PROFILE", link: "https://github.com/vislabs-web", desc: "My official source code repository.", keys: ["github", "code", "repo", "git"] },
+            { name: "FIRST PORTFOLIO", link: "https://vislabs-web.github.io/Main/", desc: "Where it all started.", keys: ["first", "portfolio", "vaibhav"] },
+            { name: "WEBSITE GALLERY", link: "https://vislabs-web.github.io/GITv1.3/", desc: "Collection of projects.", keys: ["gallery", "git", "websites"] },
+            { name: "FLOWER ANIMATION", link: "https://vislabs-web.github.io/flower/", desc: "Beauty of flower animation.", keys: ["flower", "animation"] },
+            { name: "COW ERROR", link: "https://vislabs-web.github.io/cow-error/", desc: "Funny cow animation.", keys: ["cow", "error"] },
+            { name: "AURA AI", link: "https://vislabs-web.github.io/Final.ai/", desc: "Advanced AI assistance.", keys: ["aura", "ai"] },
+            { name: "AURA AI V1.1", link: "https://vislabs-web.github.io/Aura/", desc: "The next evolution.", keys: ["aura", "ai", "update"] },
+            { name: "CHAL-CHAL", link: "https://vislabs-web.github.io/chal-chal/", desc: "Inspired car game.", keys: ["game", "car", "racing"] },
+            { name: "TOILET PAPER CROSS ROAD", link: "https://vislabs-web.github.io/roadv1.2/", desc: "The hardest game.", keys: ["toilet", "road", "hardest", "game"] }
+        ];
+
+        function showPage(pageId, element) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+            if(pageId === 'search') filterSites();
+        }
+
+        function filterSites() {
+            const query = document.getElementById('db-search').value.toLowerCase();
+            const resultsArea = document.getElementById('search-results');
+            resultsArea.innerHTML = "";
+            const filtered = sites.filter(s => s.name.toLowerCase().includes(query) || s.keys.some(k => k.toLowerCase().includes(query)));
+            filtered.forEach(site => {
+                resultsArea.innerHTML += `<a href="${site.link}" target="_blank" class="result-link"><div class="card"><h3>${site.name}</h3><p style="font-size:0.8rem;">${site.desc}</p></div></a>`;
+            });
+        }
+        filterSites();
+    </script>
+</body>
+</html>
