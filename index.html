@@ -10,200 +10,132 @@
             --accent: #ff5c5c; 
             --black: #000000;
             --white: #ffffff;
-            --blue: #a2d2ff; 
-            --green: #b9ffb9; 
+            --blue-soft: #e2f0ff; 
+            --green-soft: #7ae582; 
             --border-size: 4px;
         }
 
-        /* Base Reset */
+        /* 1. Fluid Typography & Reset */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial Black', sans-serif; }
-        body { background-color: var(--bg); padding: 10px 10px 120px 10px; color: var(--black); line-height: 1.2; overflow-x: hidden; }
+        
+        html { font-size: 14px; } /* Base for mobile */
+        @media (min-width: 768px) { html { font-size: 16px; } } /* Base for desktop */
 
-        /* Floating Contact Bar */
+        body { 
+            background-color: var(--bg); 
+            padding: 1rem 1rem 120px 1rem; 
+            color: var(--black); 
+            display: flex; flex-direction: column; align-items: center; 
+            min-height: 100vh;
+        }
+
+        /* 2. Proportional Containers */
+        .content-container, nav { 
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+
+        /* COOKIE POPUP */
+        #cookie-popup {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; max-width: 400px; background: var(--white);
+            border: var(--border-size) solid var(--black); padding: 2rem;
+            box-shadow: 12px 12px 0px var(--black); z-index: 9999;
+            text-align: center;
+        }
+
+        #cookie-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 9998; backdrop-filter: blur(8px);
+        }
+
+        /* 3. Soft-Aesthetic Contact Bar (Responsive) */
         .contact-bar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--white);
-            border: var(--border-size) solid var(--black);
-            padding: 12px 15px;
-            display: flex;
-            gap: 15px;
-            box-shadow: 6px 6px 0px var(--black);
-            z-index: 2001;
-            width: max-content;
-            max-width: 90%;
-            justify-content: center;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: var(--blue-soft); border: var(--border-size) solid var(--black);
+            padding: 0.8rem 1.2rem; display: flex; gap: 1rem;
+            box-shadow: 6px 6px 0px var(--black); z-index: 2001;
+            width: auto; max-width: 95vw;
         }
+        .contact-item { color: var(--black); transition: 0.3s; display: flex; padding: 5px; border-radius: 8px; }
+        .contact-item svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2.5; fill: none; }
+        .contact-item:hover { background: var(--green-soft); transform: translateY(-5px); }
 
-        .contact-item {
-            color: var(--black);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.2s ease;
-        }
-
-        .contact-item svg {
-            width: 24px;
-            height: 24px;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        /* Navbar */
+        /* 4. Navbar - Side Aligned for Desktop, Stacked for Mobile */
         nav {
-            background: var(--white);
-            border: var(--border-size) solid var(--black);
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 6px 6px 0px var(--black);
-            margin-bottom: 30px;
-            position: relative; 
+            background: var(--white); border: var(--border-size) solid var(--black);
+            padding: 1rem; display: flex; flex-direction: column; align-items: center;
+            box-shadow: 6px 6px 0px var(--black); margin-bottom: 2rem; 
+            position: relative;
         }
 
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-
-        .logo-box {
-            width: 40px; height: 40px;
-            background: var(--black);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
+        .brand-container { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; z-index: 5; }
+        .logo-box { width: 40px; height: 40px; background: var(--black); color: var(--white); display: flex; align-items: center; justify-content: center; box-shadow: 3px 3px 0px var(--accent); }
 
         .nav-links { 
-            list-style: none; 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 5px; 
-            width: 100%;
+            list-style: none; display: flex; flex-wrap: wrap; 
+            justify-content: center; gap: 0.2rem; width: 100%; 
+            position: relative; margin-top: 1rem; 
         }
-        
-        .nav-links li { 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            padding: 8px 12px; 
-            font-size: 0.7rem; 
-            border: 2px solid transparent;
-        }
+        .nav-links li { cursor: pointer; text-transform: uppercase; padding: 0.6rem 0.8rem; font-size: 0.8rem; z-index: 2; }
 
         #nav-indicator {
-            position: absolute;
-            background: var(--accent);
-            border: 2px solid var(--black);
-            z-index: -1;
-            transition: all 0.3s ease;
-            display: none;
+            position: absolute; background: var(--accent); border: 2px solid var(--black);
+            box-shadow: 3px 3px 0px var(--black); z-index: 1; 
+            transition: all 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            pointer-events: none; display: none;
         }
 
-        /* Content Container */
-        .content-container { max-width: 900px; margin: 0 auto; width: 100%; }
-
-        .page-section {
-            display: none;
-            background: var(--white);
-            border: var(--border-size) solid var(--black);
-            padding: 30px 20px;
-            box-shadow: 8px 8px 0px var(--black);
+        /* 5. Content Layouts */
+        .page-section { 
+            display: none; background: var(--white); border: var(--border-size) solid var(--black); 
+            padding: 2rem 1.5rem; box-shadow: 8px 8px 0px var(--black); 
+            animation: slideUp 0.3s ease-out; 
         }
-
         .active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1 { font-size: 2.2rem; text-transform: uppercase; margin-bottom: 15px; word-wrap: break-word; }
-        
-        .badge {
-            background: var(--black); color: white;
-            padding: 6px 12px; font-size: 0.65rem;
-            border: 2px solid var(--black);
-            display: inline-block; margin: 3px;
-        }
+        h1 { font-size: 2.5rem; text-transform: uppercase; margin-bottom: 1.5rem; line-height: 1; word-break: break-word; }
+        .card { border: var(--border-size) solid var(--black); padding: 1.5rem; background: var(--white); box-shadow: 6px 6px 0px var(--black); margin-top: 1.5rem; position: relative; }
+        .btn { display: block; width: 100%; background: var(--black); color: var(--white); padding: 1.2rem; text-transform: uppercase; text-decoration: none; border: none; box-shadow: 4px 4px 0px var(--accent); font-size: 1rem; text-align: center; margin-top: 1rem; cursor: pointer; }
 
-        .card {
-            border: var(--border-size) solid var(--black);
-            padding: 20px;
-            background: var(--white);
-            box-shadow: 6px 6px 0px var(--black);
-            margin-top: 15px;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            background: var(--black);
-            color: var(--white);
-            padding: 15px;
-            text-transform: uppercase;
-            text-decoration: none;
-            border: none;
-            box-shadow: 4px 4px 0px var(--accent);
-            font-size: 0.9rem;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        /* Responsive adjustments for Desktop */
+        /* 6. Big Screen Proportions */
         @media (min-width: 768px) {
-            body { padding: 20px 20px 120px 20px; }
-            nav { flex-direction: row; justify-content: space-between; padding: 10px 20px; min-height: 85px; }
-            .brand-container { margin-bottom: 0; }
-            .nav-links { width: auto; gap: 10px; }
-            .nav-links li { font-size: 0.8rem; padding: 12px 18px; }
-            h1 { font-size: 3.5rem; }
-            .page-section { padding: 50px 40px; box-shadow: 12px 12px 0px var(--black); }
-            .btn { display: inline-block; width: auto; }
-            .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            body { padding: 3rem 2rem 150px 2rem; }
+            nav { flex-direction: row; justify-content: space-between; padding: 1rem 2rem; }
+            .nav-links { width: auto; margin-top: 0; justify-content: flex-end; gap: 1rem; }
+            .nav-links li { font-size: 0.9rem; padding: 0.8rem 1.5rem; }
+            h1 { font-size: 5rem; }
+            .page-section { padding: 4rem; box-shadow: 15px 15px 0px var(--black); }
+            .btn { display: inline-block; width: auto; min-width: 220px; }
+            .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+            .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         }
 
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
         .result-link { text-decoration: none; color: inherit; }
     </style>
 </head>
 <body>
 
+    <div id="cookie-overlay"></div>
+    <div id="cookie-popup">
+        <h2>🍪 COOKIE_NOTICE</h2>
+        <p>Accept to enter the HUB. Everything here is built for the vibe.</p>
+        <button class="btn" onclick="acceptCookies()">I ACCEPT</button>
+    </div>
+
     <div class="contact-bar">
-        <a href="https://wa.me/917721954115" class="contact-item" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-        </a>
-        <a href="tel:+917721954115" class="contact-item">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        </a>
-        <a href="mailto:vir.vaibhav007@gmail.com" class="contact-item">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </a>
-        <a href="https://www.instagram.com/its_ur_cookiee/" class="contact-item" target="_blank">
-            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="https://github.com/vislabs-web" class="contact-item" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-        </a>
+        <a href="https://wa.me/917721954115" class="contact-item" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></a>
+        <a href="tel:+917721954115" class="contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
+        <a href="mailto:vir.vaibhav007@gmail.com" class="contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+        <a href="https://www.instagram.com/its_ur_cookiee/" class="contact-item" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
     </div>
 
     <nav id="navbar">
-        <div class="brand-container" onclick="showPage('home', this)">
+        <div class="brand-container" onclick="showPage('home', null)">
             <div class="logo-box">V</div>
-            <div style="font-size: 1rem;">MY_PROTOFILO</div>
+            <div style="font-size: 1.1rem; letter-spacing: -1px;">MY_PROTOFILO</div>
         </div>
         <div id="nav-indicator"></div>
         <ul class="nav-links">
@@ -217,85 +149,107 @@
     <div class="content-container">
         <div id="home" class="page-section active">
             <h1>WELCOME_TO THE_HUB</h1>
-            <p style="background: var(--blue); display: inline-block; padding: 5px 10px; border: 2px solid #000; margin-bottom: 15px; font-size: 0.8rem;">
-                VAIBHAV VISHWAKARMA AKA VIR VAIBHAV
-            </p>
-            <p>16-year-old creator specializing in <strong>Vibe Coding</strong> and Manga Artistry.</p>
-            <button class="btn" onclick="showPage('products', null)">Go to Shop →</button>
+            <p style="background: var(--blue-soft); display: inline-block; padding: 0.8rem 1.2rem; border: 3px solid #000; margin-bottom: 1.5rem;">VAIBHAV VISHWAKARMA // VIR VAIBHAV</p>
+            <p style="font-size: 1.1rem;">16-year-old creator specializing in <strong>Vibe Coding</strong> and Manga Artistry. Bringing logic to art.</p>
+            <button class="btn" onclick="showPage('products', document.querySelectorAll('.nav-links li')[2])">Explore Shop →</button>
         </div>
 
         <div id="about" class="page-section">
             <h1>THE_AUTHOR</h1>
-            <div>
+            <div style="margin-bottom: 1.5rem;">
                 <span class="badge">16 YRS OLD</span>
-                <span class="badge" style="background: var(--blue);">SCIENCE STUDENT</span>
-                <span class="badge" style="background: var(--green);">GRAD 2029</span>
+                <span class="badge" style="background: var(--blue-soft);">SCIENCE STUDENT</span>
+                <span class="badge" style="background: var(--green-soft);">GRAD 2029</span>
             </div>
             <div class="about-grid">
                 <div class="card"><h3>STRENGTHS</h3><p>⚡ Vibe Coding<br>🗣️ Communication</p></div>
                 <div class="card" style="background: var(--accent); color: white;"><h3>INTERESTS</h3><p>Manga Artist<br>Technology</p></div>
             </div>
-            <a href="vaibhav-Resume.pdf" download class="btn" style="background: var(--blue); color: var(--black); margin-top: 20px;">DOWNLOAD_RESUME (.PDF)</a>
+            <a href="vaibhav-Resume.pdf" download class="btn" style="background: var(--blue-soft); color: #000; margin-top: 2rem;">DOWNLOAD_RESUME (.PDF)</a>
         </div>
 
         <div id="search" class="page-section">
-            <h1>SEARCH_DATABASE</h1>
-            <input type="text" id="db-search" style="width:100%; padding:15px; border:4px solid #000; margin-top:10px;" placeholder="SCANNING FOR..." onkeyup="filterSites()">
-            <div id="search-results" class="results-grid"></div>
+            <h1>SEARCH_DB</h1>
+            <input type="text" id="db-search" style="width:100%; padding:1.5rem; border:5px solid #000; margin-top:1rem; outline:none; font-size: 1.1rem;" placeholder="FIND GAMES, PROJECTS, OR ME..." onkeyup="filterSites()">
+            <div id="search-results" class="results-grid" style="margin-top: 2rem;"></div>
         </div>
 
         <div id="products" class="page-section">
             <h1>THE_SHOP</h1>
-            <div class="card">
-                <h2 style="font-size: 1.8rem;">'UNTITLED'</h2>
-                <p style="background: var(--green); display: inline-block; padding: 2px 8px; border: 2px solid #000; margin: 10px 0;">BY VIR VAIBHAV</p>
-                <a href="https://vislabs-web.github.io/book/" target="_blank" class="btn">ORDER NOW →</a>
-            </div>
-            <div class="card" style="background: #eee; border-style: dashed; opacity: 0.7;">
-                <h3>NEXT_RELEASE: NEW_MANGA</h3>
-                <p>Status: Storyboarding... Coming Soon!</p>
+            <div class="results-grid">
+                <div class="card" style="grid-column: span 2;">
+                    <div style="position:absolute; background: var(--accent); color: white; top: -15px; right: 15px; padding: 5px 15px; border: 3px solid #000; font-size: 0.8rem;">FEATURED</div>
+                    <h2 style="font-size: 2rem;">'UNTITLED'</h2>
+                    <p style="margin: 1rem 0;">The official art book and story collection by Vir Vaibhav.</p>
+                    <a href="https://vislabs-web.github.io/book/" target="_blank" class="btn">ORDER NOW →</a>
+                </div>
+                <div class="card" style="background: #eee; border-style: dashed; opacity: 0.6; display: flex; align-items: center; justify-content: center;">
+                    <h3 style="text-align: center;">NEW_MANGA<br>COMING SOON</h3>
+                </div>
             </div>
         </div>
 
         <div id="soon" class="page-section">
             <h1>SOON_2026</h1>
-            <div class="card" style="background: var(--black); color: white; text-align: center; padding: 40px 10px;">
-                <h2>MANGA_PROJ</h2>
-                <p>A new visual experience.</p>
+            <div class="card" style="background: var(--black); color: white; text-align: center; padding: 4rem 1rem;">
+                <h2 style="font-size: 2.5rem;">PROJECT_X</h2>
+                <p>The next level of digital interaction.</p>
             </div>
         </div>
     </div>
 
     <script>
         const sites = [
-            { name: "GITHUB PROFILE", link: "https://github.com/vislabs-web", desc: "My official source code repository.", keys: ["github", "code", "repo", "git"] },
-            { name: "FIRST PORTFOLIO", link: "https://vislabs-web.github.io/Main/", desc: "Where it all started.", keys: ["first", "portfolio", "vaibhav"] },
-            { name: "WEBSITE GALLERY", link: "https://vislabs-web.github.io/GITv1.3/", desc: "Collection of projects.", keys: ["gallery", "git", "websites"] },
-            { name: "FLOWER ANIMATION", link: "https://vislabs-web.github.io/flower/", desc: "Beauty of flower animation.", keys: ["flower", "animation"] },
-            { name: "COW ERROR", link: "https://vislabs-web.github.io/cow-error/", desc: "Funny cow animation.", keys: ["cow", "error"] },
-            { name: "AURA AI", link: "https://vislabs-web.github.io/Final.ai/", desc: "Advanced AI assistance.", keys: ["aura", "ai"] },
-            { name: "AURA AI V1.1", link: "https://vislabs-web.github.io/Aura/", desc: "The next evolution.", keys: ["aura", "ai", "update"] },
-            { name: "CHAL-CHAL", link: "https://vislabs-web.github.io/chal-chal/", desc: "Inspired car game.", keys: ["game", "car", "racing"] },
-            { name: "TOILET PAPER CROSS ROAD", link: "https://vislabs-web.github.io/roadv1.2/", desc: "The hardest game.", keys: ["toilet", "road", "hardest", "game"] }
+            { name: "VAIBHAV VISHWAKARMA", link: "#about", desc: "Creator of this Hub. 16yo Manga Artist & Dev.", keys: ["vaibhav", "vir", "who is", "creator"] },
+            { name: "TOILET PAPER CROSS ROAD", link: "https://vislabs-web.github.io/roadv1.2/", desc: "The hardest game you will ever play.", keys: ["toilet", "paper", "game", "cross", "road"] },
+            { name: "BUY 'UNTITLED' BOOK", link: "https://vislabs-web.github.io/book/", desc: "Official Manga/Art book by Vir Vaibhav.", keys: ["buy", "book", "untitled", "shop"] },
+            { name: "INSTAGRAM", link: "https://www.instagram.com/its_ur_cookiee/", desc: "@its_ur_cookiee", keys: ["insta", "instagram", "social"] },
+            { name: "WHATSAPP", link: "https://wa.me/917721954115", desc: "Direct message for inquiries.", keys: ["whatsapp", "chat"] },
+            { name: "GITHUB PROFILE", link: "https://github.com/vislabs-web", desc: "Main source code repository.", keys: ["github", "code", "git"] },
+            { name: "AURA AI", link: "https://vislabs-web.github.io/Final.ai/", desc: "AI Assistant Project.", keys: ["aura", "ai"] },
+            { name: "CHAL-CHAL", link: "https://vislabs-web.github.io/chal-chal/", desc: "Car racing game.", keys: ["game", "car"] }
         ];
+
+        const indicator = document.getElementById('nav-indicator');
+        const navbar = document.getElementById('navbar');
+
+        function moveIndicator(element) {
+            if (element && window.innerWidth > 768) {
+                indicator.style.display = 'block';
+                const rect = element.getBoundingClientRect();
+                const navRect = navbar.getBoundingClientRect();
+                indicator.style.width = rect.width + 'px';
+                indicator.style.height = rect.height + 'px';
+                indicator.style.left = (rect.left - navRect.left) + 'px';
+                indicator.style.top = (rect.top - navRect.top) + 'px';
+            } else { indicator.style.display = 'none'; }
+        }
 
         function showPage(pageId, element) {
             document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
+            moveIndicator(element);
+            window.scrollTo({top: 0, behavior: 'smooth'});
             if(pageId === 'search') filterSites();
+        }
+
+        function acceptCookies() {
+            document.getElementById('cookie-popup').style.display = 'none';
+            document.getElementById('cookie-overlay').style.display = 'none';
         }
 
         function filterSites() {
             const query = document.getElementById('db-search').value.toLowerCase();
             const resultsArea = document.getElementById('search-results');
             resultsArea.innerHTML = "";
-            const filtered = sites.filter(s => s.name.toLowerCase().includes(query) || s.keys.some(k => k.toLowerCase().includes(query)));
+            const filtered = sites.filter(s => s.name.toLowerCase().includes(query) || s.keys.some(k => query.includes(k) || k.includes(query)));
             filtered.forEach(site => {
-                resultsArea.innerHTML += `<a href="${site.link}" target="_blank" class="result-link"><div class="card"><h3>${site.name}</h3><p style="font-size:0.8rem;">${site.desc}</p></div></a>`;
+                const target = site.link.startsWith('#') ? `onclick="showPage('${site.link.substring(1)}', null); return false;"` : `target="_blank"`;
+                resultsArea.innerHTML += `<a href="${site.link}" ${target} class="result-link"><div class="card"><h3>${site.name}</h3><p style="font-size:0.85rem; margin-top:8px;">${site.desc}</p></div></a>`;
             });
         }
         filterSites();
+        window.addEventListener('resize', () => { indicator.style.display = 'none'; });
     </script>
 </body>
 </html>
